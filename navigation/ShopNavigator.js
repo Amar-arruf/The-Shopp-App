@@ -2,7 +2,6 @@ import {createAppContainer} from 'react-navigation';
 import { createStackNavigator } from 'react-navigation-stack';
 import {Platform} from 'react-native';
 
-import ProductOverviewScreen from '../screens/shop/ProductOverviewScreen';
 import Colors from '../constants/Color';
 import ProductsOverviewScreen from '../screens/shop/ProductOverviewScreen';
 
