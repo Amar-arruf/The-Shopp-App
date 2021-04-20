@@ -15,15 +15,15 @@ const store = createStore(rootReducers);
 
 const fetchFonts = () => {
   return Font.loadAsync({
-    'open-sans' : require('./assets/fonts/open-sans-regular.ttf'),
-    'open-sans-bold' : require('./assets/fonts/open-sans-bold.ttf')
+    "open-sans" : require("./assets/fonts/open-sans-regular.ttf"),
+    "open-sans-bold" : require("./assets/fonts/open-sans-bold.ttf")
   });
 };
 
 export default function App() {
   const [fontLoaded,setFontLoaded] = useState(false);
 
-  if (fontLoaded) {
+  if (!fontLoaded) {
     return (
       <AppLoading
       startAsync={fetchFonts}
