@@ -11,6 +11,11 @@ import * as productsActions from '../../store/actions/Product';
 const UserProductsScreen = props => {
   const userProducts = useSelector(state => state.products.userProducts);
   const dispatch = useDispatch();
+
+  const editProductHandler = (id) => {
+    props.navigation.navigate('EditProducts', { productId: id});
+  }
+
   return (
       <FlatList 
         data={userProducts} 
@@ -21,14 +26,14 @@ const UserProductsScreen = props => {
             title={itemData.item.title}
             price={itemData.item.price}
             onSelct={()=> {
-
+              editProductHandler(itemData.item.id);
             }}
           >
           <Button 
           color={Colors.primary} 
           title="Edit" 
           onPress={()=> {
-            
+            editProductHandler(itemData.item.id);
           }}/>
           <Button 
           color={Colors.primary} 
@@ -54,6 +59,17 @@ UserProductsScreen.navigationOptions = navData => {
             navData.navigation.toggleDrawer();
           }}
         />
+      </HeaderButtons>
+    ),
+    headerRight: () => (
+      <HeaderButtons HeaderButtonComponent={HeaderButton}>
+      <Item 
+        title="Add"
+        iconName={Platform.OS === 'android' ? 'md-create' : 'ios-create'}
+        onPress= {() => {
+          navData.navigation.navigate('EditProducts');
+        }}
+      />
       </HeaderButtons>
     ),
   }
