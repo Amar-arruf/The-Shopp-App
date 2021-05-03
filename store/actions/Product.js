@@ -7,15 +7,36 @@ export const deleteProduct =productId => {
 };
 
 export const createProduct = (title, description, imageUrl, price) => {
-  return {
-    type: CREATE_PRODUCT,
-    productData: {
+  return async dispatch => {
+    // any async code you want!
+   const response = await fetch('https://rn-complete-guide-57cd5-default-rtdb.asia-southeast1.firebasedatabase.app/Products.json',{
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify({
       title,
       description,
       imageUrl,
       price
-    }
+      })
+    });
+
+    const resData = await response.json();
+
+    console.log(resData)
+
+    dispatch({
+      type: CREATE_PRODUCT,
+      productData: {
+        title,
+        description,
+        imageUrl,
+        price
+      }
+    });
   }
+  
 };
 
 export const updateProduct = (id,title, description, imageUrl,) => {
