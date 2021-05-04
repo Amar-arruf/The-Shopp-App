@@ -8,25 +8,35 @@ export const SET_PRODUCT = 'SET_PRODUCTS';
 export const fetchProducts = () => {
   return async dispatch => {
     // any async code you want!
-   const response = await fetch(
-     'https://rn-complete-guide-57cd5-default-rtdb.asia-southeast1.firebasedatabase.app/Products.json'
-   );
+    try {
+      const response = await fetch(
+        'https://rn-complete-guide-57cd5-default-rtdb.asia-southeast1.firebasedatabase.app/Products.json'
+      );
 
-    const resData = await response.json();
-    const loadedProduct = [];
-
-    for (const key in resData) {
-        loadedProduct.push(new Product(
-          key,
-          'u1',
-          resData[key].title,
-          resData[key].imageUrl,
-          resData[key]. description,
-          resData[key].price
-          ));
+      if (!response.ok) {
+        throw new Error('Something went wrong!');
+      }
+   
+       const resData = await response.json();
+       const loadedProduct = [];
+   
+       for (const key in resData) {
+           loadedProduct.push(new Product(
+             key,
+             'u1',
+             resData[key].title,
+             resData[key].imageUrl,
+             resData[key]. description,
+             resData[key].price
+             ));
+       }
+   
+       dispatch({type : SET_PRODUCT, products: loadedProduct})
+    } catch (err) {
+      // send to custom analytics server
+      throw err;
     }
-
-    dispatch({type : SET_PRODUCT, products: loadedProduct})
+   
   };
 };
 
