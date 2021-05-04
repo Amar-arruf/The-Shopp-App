@@ -16,7 +16,6 @@ const ProductsOverviewScreen = props => {
   const dispacth = useDispatch();
   
   const loadProducts = useCallback(async () => {
-    console.log('LOAD PRODUCTS');
     setError(null);
     setIsLoading(true);
     try {

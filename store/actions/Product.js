@@ -41,7 +41,13 @@ export const fetchProducts = () => {
 };
 
 export const deleteProduct =productId => {
-  return { type: DELETE_PRODUCT, pid: productId };
+  return async dispatch => {
+    await fetch (`https://rn-complete-guide-57cd5-default-rtdb.asia-southeast1.firebasedatabase.app/Products/${productId}.json`,
+    {
+      method: 'DELETE'
+    });
+    dispatch({ type: DELETE_PRODUCT, pid: productId });
+  }
 };
 
 export const createProduct = (title, description, imageUrl, price) => {
@@ -62,8 +68,6 @@ export const createProduct = (title, description, imageUrl, price) => {
 
     const resData = await response.json();
 
-    console.log(resData)
-
     dispatch({
       type: CREATE_PRODUCT,
       productData: {
@@ -79,13 +83,27 @@ export const createProduct = (title, description, imageUrl, price) => {
 };
 
 export const updateProduct = (id,title, description, imageUrl,) => {
-  return {
-    type: UPDATE_PRODUCT,
-    pid: id,
-    productData: {
+  return async dispatch => {
+     await fetch(`https://rn-complete-guide-57cd5-default-rtdb.asia-southeast1.firebasedatabase.app/Products/${id}.json`,{
+    method: 'PATCH',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify({
       title,
       description,
-      imageUrl
-    }
+      imageUrl,
+      })
+    });
+    dispatch ({
+      type: UPDATE_PRODUCT,
+      pid: id,
+      productData: {
+        title,
+        description,
+        imageUrl
+      }
+    })
   }
+  
 };
