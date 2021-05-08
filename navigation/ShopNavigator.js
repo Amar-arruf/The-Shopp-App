@@ -1,5 +1,5 @@
 import React from 'react';
-import {createAppContainer} from 'react-navigation';
+import {createAppContainer, createSwitchNavigator} from 'react-navigation';
 import { createStackNavigator } from 'react-navigation-stack';
 import { createDrawerNavigator } from 'react-navigation-drawer';
 import {Platform} from 'react-native';
@@ -11,6 +11,7 @@ import OrdersScreen from '../screens/shop/OrdersScreen';
 import CartScreen from '../screens/shop/CartScreen';
 import UserProductsScreen from '../screens/user/UserProductScreen';
 import EditProductScreen from '../screens/user/EditProductScreen';
+import AuthScreen from '../screens/user/AuthScreen';
 import { Ionicons } from '@expo/vector-icons';
 
 const defaultNavOptions = {
@@ -93,4 +94,15 @@ const ShopNavigator = createDrawerNavigator(
   }
 );
 
-export default createAppContainer(ShopNavigator);
+const AuthNavigator = createStackNavigator({
+  Auth: AuthScreen
+}, {
+  defaultNavigationOptions: defaultNavOptions
+});
+
+const MainNavigator = createSwitchNavigator({
+  Auth: AuthNavigator,
+  Shop: ShopNavigator
+});
+
+export default createAppContainer(MainNavigator);
