@@ -172,7 +172,7 @@ const EditProductScreen = props => {
             multiline
             mumberOfLines={3}
             onInputChange={inputChangeHandler}
-            initialValue={editedProduct ? editedProduct.title : ''}
+            initialValue={editedProduct ? editedProduct.description : ''}
             initiallyValid={!!editedProduct}
             required
             minLength={5}

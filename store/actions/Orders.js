@@ -4,9 +4,10 @@ export const ADD_ORDER ='ADD_ORDER';
 export const SET_ORDER ='SET_ORDER';
 
 export const fetchOrders = () => {
-  return async dispatch => {
+  return async (dispatch,getState) => {
+    const token = getState().auth.token;
     const response = await fetch(
-      'https://rn-complete-guide-57cd5-default-rtdb.asia-southeast1.firebasedatabase.app/Orders/u1.json'
+      `https://rn-complete-guide-57cd5-default-rtdb.asia-southeast1.firebasedatabase.app/Orders/u1.json?auth=${token}`
     );
       try {
     if (!response.ok) {
