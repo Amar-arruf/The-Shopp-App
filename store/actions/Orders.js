@@ -5,9 +5,9 @@ export const SET_ORDER ='SET_ORDER';
 
 export const fetchOrders = () => {
   return async (dispatch,getState) => {
-    const token = getState().auth.token;
+    const userId = getState().auth.userId;
     const response = await fetch(
-      `https://rn-complete-guide-57cd5-default-rtdb.asia-southeast1.firebasedatabase.app/Orders/u1.json?auth=${token}`
+      `https://rn-complete-guide-57cd5-default-rtdb.asia-southeast1.firebasedatabase.app/Orders/${userId}.json`
     );
       try {
     if (!response.ok) {
@@ -38,8 +38,10 @@ export const fetchOrders = () => {
 
 export const addOrder = (cartItems, totalAmount) => {
   const date = new Date();
-    return async dispatch =>  {
-      const response = await fetch('https://rn-complete-guide-57cd5-default-rtdb.asia-southeast1.firebasedatabase.app/Orders/u1.json',{
+    return async (dispatch, getState) =>  {
+      const token = getState().auth.token;
+      const userId = getState().auth.userId;
+      const response = await fetch(`https://rn-complete-guide-57cd5-default-rtdb.asia-southeast1.firebasedatabase.app/Orders/${userId}.json?auth=${token}`,{
     method: 'POST',
     headers: {
       'Content-Type': 'application/json'
