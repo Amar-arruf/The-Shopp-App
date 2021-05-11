@@ -14,7 +14,7 @@ import CartScreen from '../screens/shop/CartScreen';
 import UserProductsScreen from '../screens/user/UserProductScreen';
 import EditProductScreen from '../screens/user/EditProductScreen';
 import AuthScreen from '../screens/user/AuthScreen';
-import StartupScreen from '../screens/StartScreeen';
+import StartupScreen from '../screens/StartupScreen';
 import * as authActions from '../store/actions/auth';
 
 
@@ -105,8 +105,8 @@ const ShopNavigator = createDrawerNavigator(
             title="Logout" 
             color={Colors.primary} 
             onPress={() => {
-              dispatch(authActions.logout());
-              props.navigation.navigate('Auth');
+              dispatch(authActions.logout())
+              // props.navigation.navigate('Auth');
           }}/>
         </SafeAreaView>
       </View>

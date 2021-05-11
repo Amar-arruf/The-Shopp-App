@@ -5,11 +5,12 @@ import AppLoading  from 'expo-app-loading';
 import * as Font from 'expo-font';
 import ReduxThunk from 'redux-thunk';
 
+
 import ProductsReducers from './store/reducers/product';
 import cartReducer from './store/reducers/cart';
 import orderReducer from './store/reducers/Orders';
 import authReducer from './store/reducers/Auth';
-import ShopNavigator from './navigation/ShopNavigator';
+import NavigationContainer from './navigation/NavigationContainer';
 
 const rootReducers = combineReducers ({
   products: ProductsReducers,
@@ -42,7 +43,7 @@ export default function App() {
 
   return (
     <Provider store={store}>
-      <ShopNavigator/>
+      <NavigationContainer/>
     </Provider>
   );
 }
