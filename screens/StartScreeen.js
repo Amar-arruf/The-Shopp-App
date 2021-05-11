@@ -1,11 +1,11 @@
 import React, { useEffect } from 'react';
-import AsyncStorage from '@react-native-async-storage/async-storage';
 import { 
   View,
-  ActivityIndictor,
+  ActivityIndicator,
   StyleSheet
- } from 'react-native';
- import { useDispatch } from 'react-redux';
+} from 'react-native';
+import  AsyncStorage  from '@react-native-async-storage/async-storage';
+import { useDispatch } from 'react-redux';
 
 import Colors from '../constants/Color';
 import * as authActions from '../store/actions/auth';
@@ -38,7 +38,7 @@ import * as authActions from '../store/actions/auth';
 
    return (
     <View style={styles.screen}>
-      <ActivityIndictor size="large" color={Colors.primary} />
+      <ActivityIndicator size='large' color={Colors.primary} />
     </View>
    );
  };
